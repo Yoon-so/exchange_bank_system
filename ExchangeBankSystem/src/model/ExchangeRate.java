@@ -31,7 +31,8 @@ public class ExchangeRate {
     }
 
     public double convert(double amount, String currency) {
-        return amount * getRate(currency);
+        double result = amount * getRate(currency);
+        return Math.round(result * 100.0) / 100.0;
     }
 
     public double usdToKrw(double amount) {

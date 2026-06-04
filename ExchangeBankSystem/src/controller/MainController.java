@@ -32,7 +32,8 @@ public class MainController {
                     "DEPOSIT",
                     amount,
                     "KRW",
-                    java.time.LocalDate.now().toString()
+                    LocalDate.now().toString(),
+                    account.getBalanceInfo("KRW")
             )
         );
     }
@@ -47,7 +48,8 @@ public class MainController {
                         "WITHDRAW",
                         amount,
                         "KRW",
-                        java.time.LocalDate.now().toString()
+                        java.time.LocalDate.now().toString(),
+                        account.getBalanceInfo("KRW")
                 )
             );
         }
@@ -70,7 +72,8 @@ public class MainController {
                         "EXCHANGE",
                         amount,
                         currency,
-                        java.time.LocalDate.now().toString()
+                        java.time.LocalDate.now().toString(),
+                        account.getBalanceInfo(currency)
                 )
         );
         return convertedAmount;
@@ -97,8 +100,12 @@ public class MainController {
         return account.getJPYBalance();
     }
 
+    public double getRate(String currency) {
+        return exchangeRate.getRate(currency);
+    }
+
     //Transaction History
-    public ArrayList<Transaction> geTransactions() {
+    public ArrayList<Transaction> getTransactions() {
         return transactionHistory;
     }
 

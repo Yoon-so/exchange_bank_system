@@ -25,9 +25,9 @@ public class DepositWithdrawView extends JFrame {
     private void initializeFrame() {
         setTitle(mode);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setSize(350, 200);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     private void initializeComponents() {

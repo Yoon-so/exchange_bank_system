@@ -30,9 +30,9 @@ public class MainMenuView extends JFrame{
     private void initializeFrame() {
         setTitle("Exchange Bank System");
 
+        setSize(500,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setSize(500,500);
     }
 
     private void initializeComponents() {
@@ -85,6 +85,14 @@ public class MainMenuView extends JFrame{
 
         withdrawButton.addActionListener(e -> {
             new DepositWithdrawView(controller, "WITHDRAW");
+        });
+
+        exchangeButton.addActionListener(e -> {
+            new ExchangeView(controller);
+        });
+
+        historyButton.addActionListener(e -> {
+            new TransactionView(controller);
         });
     }
 }

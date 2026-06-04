@@ -74,4 +74,19 @@ public class Account {
     public double getJPYBalance() {
         return jpyBalance;
     }
+    
+    public String getBalanceInfo(String currency) {
+        switch (currency.toUpperCase()) {
+            case "KRW":
+                return krwBalance + " KRW";
+            case "USD":
+                return usdBalance + " USD";
+            case "EUR":
+                return eurBalance + " EUR";
+            case "JPY":
+                return jpyBalance + " JPY";
+            default:
+                return "";
+        }
+    }
 }
