@@ -27,7 +27,7 @@ public class RateView extends JPanel {
                     + "Exchange Rates (per 1,000 KRW)" + "<br>" + "<hr>"
                     + "USD: " + controller.getRate("USD") * 1000 + "<br>"
                     + "EUR: " + controller.getRate("EUR") * 1000 + "<br>"
-                    + "\nJPY: " + controller.getRate("JPY") * 1000
+                    + "JPY: " + controller.getRate("JPY") * 1000
                     + "</center></html>"
         );
     }

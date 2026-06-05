@@ -42,4 +42,14 @@ public class Transaction {
         return type + " | " + amount + " | " + currency + " | " + date + " | " + balanceInfo;
     }
 
+    public String getDescription() {
+        return type + ": " + amount + " " + currency;
+    }
+
+    public String formatAmount(double amount) {
+        if (amount == (long) amount) {
+            return String.valueOf((long) amount);
+        }
+        return String.format("%.2f", amount);
+    }
 }

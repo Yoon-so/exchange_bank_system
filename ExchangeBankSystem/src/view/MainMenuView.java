@@ -78,10 +78,10 @@ public class MainMenuView extends JFrame{
 
         balanceButton.addActionListener(e -> {
             String message = "Owner: " + controller.getOwner()
-                            + "\n\nKRW: " +  controller.getKRWBalance()
-                            + "\nUSD: " + controller.getUSDBalance()
-                            + "\nEUR: " + controller.getEURBalance()
-                            + "\nJPY: " + controller.getJPYBalance();
+                            + "\n\nKRW: " + formatAmount(controller.getKRWBalance())
+                            + "\nUSD: " + formatAmount(controller.getUSDBalance())
+                            + "\nEUR: " + formatAmount(controller.getEURBalance())
+                            + "\nJPY: " + formatAmount(controller.getJPYBalance());
 
             JOptionPane.showMessageDialog(this, message, "Account Balance", JOptionPane.INFORMATION_MESSAGE);
         });
@@ -107,5 +107,12 @@ public class MainMenuView extends JFrame{
             JOptionPane.showMessageDialog(this, "Data saved succesfully!");
             System.exit(0);
         });
+    }
+
+    private String formatAmount(double amount) {
+        if (amount == (long) amount) {
+            return String.valueOf((long) amount);
+        }
+        return String.format("%.2f", amount);
     }
 }

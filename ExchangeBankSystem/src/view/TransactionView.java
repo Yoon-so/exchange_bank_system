@@ -41,7 +41,7 @@ public class TransactionView extends JFrame {
         for (Transaction t : controller.getTransactions()) {
             model.addRow(
                 new Object[] {
-                    t.getType(),
+                    t.getDescription(),
                     t.getAmount(),
                     t.getCurrency(),
                     t.getDate(),

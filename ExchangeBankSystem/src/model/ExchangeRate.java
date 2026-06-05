@@ -35,7 +35,7 @@ public class ExchangeRate {
         return Math.round(result * 100.0) / 100.0;
     }
 
-    public double usdToKrw(double amount) {
+   /*  public double usdToKrw(double amount) {
         return amount / usdRate;
-    }
+    }*/
 }

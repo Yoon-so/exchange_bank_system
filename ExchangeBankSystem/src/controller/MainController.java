@@ -25,8 +25,7 @@ public class MainController {
         account.depositKRW(amount);
 
         transactionHistory.add(
-                new Transaction(
-                    "DEPOSIT",
+                new DepositTransaction(
                     amount,
                     "KRW",
                     LocalDate.now().toString(),
@@ -41,8 +40,7 @@ public class MainController {
 
         if (success) {
             transactionHistory.add(
-                    new Transaction(
-                        "WITHDRAW",
+                    new WithdrawTransaction(
                         amount,
                         "KRW",
                         java.time.LocalDate.now().toString(),
@@ -65,8 +63,7 @@ public class MainController {
         account.addCurrency(currency, convertedAmount);
         
         transactionHistory.add(
-                new Transaction(
-                        "EXCHANGE",
+                new ExchangeTransaction(
                         amount,
                         currency,
                         java.time.LocalDate.now().toString(),
