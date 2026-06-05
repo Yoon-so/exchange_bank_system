@@ -11,14 +11,13 @@ public class ExchangeView extends JFrame {
     private JTextField amountField;
     private JComboBox<String> currencyBox;
     private JButton exchangeButton;
-    private JLabel rateLabel;
+    private RateView rateView;
 
     public ExchangeView(MainController controller) {
         this.controller = controller;
 
         initializeFrame();
         initializeComponents();
-        updateRateLabel();
         registerListeners();
 
         setVisible(true);
@@ -27,32 +26,36 @@ public class ExchangeView extends JFrame {
     private void initializeFrame() {
         setTitle("Currency Exchange");
         
-        setSize(350,500);
+        setSize(400,350);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
     }
 
     private void initializeComponents() {
         Container c = getContentPane();
-        c.setLayout(new GridLayout(6, 1, 10, 10));
+        c.setLayout(new BorderLayout());
 
-        rateLabel = new JLabel("", SwingConstants.CENTER);
-        c.add(rateLabel);
+        rateView = new RateView(controller);
+        c.add(rateView, BorderLayout.NORTH);
 
-        c.add(new JLabel("Amount (KRW)", SwingConstants.CENTER));
+        JPanel exchangePanel = new JPanel(new GridLayout(5, 1, 10, 10));
+
+        exchangePanel.add(new JLabel("Amount (KRW)", SwingConstants.CENTER));
         amountField = new JTextField();
-        c.add(amountField);
+        exchangePanel.add(amountField);
 
-        c.add(new JLabel("Select Currency", SwingConstants.CENTER));
+        exchangePanel.add(new JLabel("Select Currency", SwingConstants.CENTER));
 
         currencyBox = new JComboBox<>();
         currencyBox.addItem("USD");
         currencyBox.addItem("EUR");
         currencyBox.addItem("JPY");
-        c.add(currencyBox);
+        exchangePanel.add(currencyBox);
 
         exchangeButton = new JButton("Exchange");
-        c.add(exchangeButton);
+        exchangePanel.add(exchangeButton);
+
+        c.add(exchangePanel, BorderLayout.CENTER);
     }
 
     private void registerListeners() {
@@ -74,15 +77,5 @@ public class ExchangeView extends JFrame {
                 JOptionPane.showMessageDialog(this, "Invalid amount!");
             }
         });
-    }
-
-    private void updateRateLabel() {
-        String text = "<html>"
-                    + "Current Exchange Rate (for 1000krw)" + "<br>" + "<hr>"
-                    + "USD: " + controller.getRate("USD") * 1000 + "<br>"
-                    + "EUR: " + controller.getRate("EUR") * 1000 + "<br>"
-                    + "\nJPY: " + controller.getRate("JPY") * 1000
-                    + "</html>";
-        rateLabel.setText(text);
     }
 }

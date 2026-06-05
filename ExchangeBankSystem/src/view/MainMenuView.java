@@ -4,6 +4,8 @@ import controller.MainController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MainMenuView extends JFrame{
     private MainController controller;
@@ -13,8 +15,7 @@ public class MainMenuView extends JFrame{
     private JButton exchangeButton;
     private JButton balanceButton;
     private JButton historyButton;
-    private JButton saveButton;
-    private JButton exitButton;
+    private JButton saveExitButton;
 
     public MainMenuView(MainController controller) {
 
@@ -31,8 +32,16 @@ public class MainMenuView extends JFrame{
         setTitle("Exchange Bank System");
 
         setSize(500,500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                controller.saveData();
+                System.exit(0);
+            }
+        });
     }
 
     private void initializeComponents() {
@@ -46,23 +55,21 @@ public class MainMenuView extends JFrame{
 
         //Button Panel
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(7, 1, 10,10));
+        buttonPanel.setLayout(new GridLayout(6, 1, 10,10));
 
         depositButton = new JButton("Deposit");
         withdrawButton = new JButton("Withdraw");
         exchangeButton = new JButton("Exchange");
         balanceButton = new JButton("Balance");
         historyButton = new JButton("History");
-        saveButton = new JButton("Save");
-        exitButton = new JButton("Exit");
+        saveExitButton = new JButton("Save & Exit");
 
         buttonPanel.add(depositButton);
         buttonPanel.add(withdrawButton);
         buttonPanel.add(exchangeButton);
         buttonPanel.add(balanceButton);
         buttonPanel.add(historyButton);
-        buttonPanel.add(saveButton);
-        buttonPanel.add(exitButton);
+        buttonPanel.add(saveExitButton);
 
         c.add(buttonPanel, BorderLayout.CENTER);
     }
@@ -93,6 +100,12 @@ public class MainMenuView extends JFrame{
 
         historyButton.addActionListener(e -> {
             new TransactionView(controller);
+        });
+
+        saveExitButton.addActionListener(e -> {
+            controller.saveData();
+            JOptionPane.showMessageDialog(this, "Data saved succesfully!");
+            System.exit(0);
         });
     }
 }

@@ -13,14 +13,11 @@ public class MainController {
     private FileManager fileManager;
 
     public MainController() {
-        account = new Account(
-                "John Doe",     
-                100000
-        );
-
         exchangeRate = new ExchangeRate();
-        transactionHistory = new ArrayList<>();
+        
         fileManager = new FileManager();
+        account = fileManager.loadAccount();
+        transactionHistory = fileManager.loadTransactions();
     }
 
     //Deposit
@@ -112,5 +109,6 @@ public class MainController {
     //Save Data
     public void saveData() {
         fileManager.saveTransaction(transactionHistory);
+        fileManager.saveAccount(account);
     }
  }

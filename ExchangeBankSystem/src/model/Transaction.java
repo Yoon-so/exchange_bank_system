@@ -36,10 +36,10 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return type + ": " + amount + " " + currency + " (" + date + ")";
+        return type + ": " + amount + " " + currency + " (" + date + ")" + " | " + balanceInfo;
     }
     public String toFileString() {
-        return type + " | " + amount + " | " + currency + " | " + date;
+        return type + " | " + amount + " | " + currency + " | " + date + " | " + balanceInfo;
     }
 
 }

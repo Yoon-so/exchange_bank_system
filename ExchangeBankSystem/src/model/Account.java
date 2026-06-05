@@ -17,6 +17,15 @@ public class Account {
         this.jpyBalance = 0.0;
     }
 
+    public Account(String owner, double krwBalance, double usdBalance, double eurBalance, double jpyBalance) {
+        this.owner = owner;
+        
+        this.krwBalance = krwBalance;
+        this.usdBalance = usdBalance;
+        this.eurBalance = eurBalance;
+        this.jpyBalance = jpyBalance;
+    }
+
     public synchronized void depositKRW(double amount) { //внесение?
         if (amount <= 0) {
             return;
