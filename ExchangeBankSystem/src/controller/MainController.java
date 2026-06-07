@@ -22,6 +22,10 @@ public class MainController {
 
     //Deposit
     public void deposit(double amount) {
+        if (amount <= 0) {
+            return;
+        }
+
         account.depositKRW(amount);
 
         transactionHistory.add(
@@ -36,6 +40,10 @@ public class MainController {
      
     //Withdraw
     public boolean withdraw(double amount) {
+        if (amount <= 0) {
+            return false;
+        }
+        
         boolean success = account.withdrawKRW(amount);
 
         if (success) {
@@ -53,8 +61,7 @@ public class MainController {
 
     //Exchange
     public double exchange(double amount, String currency) {
-
-        if (!account.withdrawKRW(amount)) {
+        if (amount <= 0 || !account.withdrawKRW(amount) ) {
             return -1;
         }
 
@@ -107,5 +114,34 @@ public class MainController {
     public void saveData() {
         fileManager.saveTransaction(transactionHistory);
         fileManager.saveAccount(account);
+    }
+
+    public void runThreadDemo() {
+
+        Account testAccount = new Account("Test User", 100000);
+
+        Thread depositThread = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                testAccount.depositKRW(100);
+            }
+        });
+
+        Thread withdrawThread = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                testAccount.withdrawKRW(100);
+            }
+        });
+
+        depositThread.start();
+        withdrawThread.start();
+
+        try {
+            depositThread.join();
+            withdrawThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Final Balance: " + testAccount.getKRWBalance());
     }
  }

@@ -26,14 +26,14 @@ public class Account {
         this.jpyBalance = jpyBalance;
     }
 
-    public synchronized void depositKRW(double amount) { //внесение?
+    public synchronized void depositKRW(double amount) { 
         if (amount <= 0) {
             return;
         }
         krwBalance += amount;
     }
 
-    public synchronized boolean withdrawKRW(double amount) { //снятие?
+    public synchronized boolean withdrawKRW(double amount) { 
         if (amount <= 0 || amount > krwBalance) {
             return false;
         }

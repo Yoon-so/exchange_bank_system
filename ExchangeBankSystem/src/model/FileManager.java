@@ -39,8 +39,27 @@ public class FileManager {
                 String[] data = line.split("\\|");
 
                 if (data.length == 5) {
-                    Transaction transaction = new Transaction(data[0].trim(), Double.parseDouble(data[1].trim()), data[2].trim(), data[3].trim(), data[4].trim());
+                    String type = data[0].trim();
+                    double amount = Double.parseDouble(data[1].trim());
+                    String currency = data[2].trim();
+                    String date = data[3].trim();
+                    String balanceInfo = data[4].trim();
 
+                    Transaction transaction;
+
+                    switch (type) {
+                        case "DEPOSIT":
+                            transaction = new DepositTransaction(amount, currency, date, balanceInfo);
+                            break;
+                        case "WITHDRAW":
+                            transaction = new WithdrawTransaction(amount, currency, date, balanceInfo);
+                            break;
+                        case "EXCHANGE":
+                            transaction = new ExchangeTransaction(amount, currency, date, balanceInfo);
+                            break;
+                        default:
+                            transaction = new Transaction(type, amount, currency, date, balanceInfo);
+                    }
                     transactions.add(transaction);
                 }
             }

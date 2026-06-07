@@ -52,6 +52,11 @@ public class DepositWithdrawView extends JFrame {
         submitButton.addActionListener(e -> {
             try {
                 double amount = Double.parseDouble(amountField.getText());
+
+                if (amount <= 0) {
+                    JOptionPane.showMessageDialog(this, "Amount must be greater than 0!");
+                    return;
+                }  
                 
                 if (mode.equals("DEPOSIT")) {
                     controller.deposit(amount);

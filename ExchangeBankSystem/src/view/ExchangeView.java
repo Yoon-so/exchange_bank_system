@@ -63,6 +63,11 @@ public class ExchangeView extends JFrame {
             try {
                 double amount = Double.parseDouble(amountField.getText());
                 String currency = (String) currencyBox.getSelectedItem();
+                
+                if (amount <= 0) {
+                    JOptionPane.showMessageDialog(this, "Amount must be greater than 0!");
+                    return;
+                }  
 
                 double result = controller.exchange(amount, currency);
 
